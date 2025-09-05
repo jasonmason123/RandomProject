@@ -1,11 +1,10 @@
-﻿using DemoAuthWebBackend.Entities;
+﻿using DemoAuthWebBackend.Context;
+using DemoAuthWebBackend.Entities;
 using DemoAuthWebBackend.Infrastructure.AuthenticationService.DTOs;
-using DemoAuthWebBackend.Infrastructure.AuthenticationService.OtpAuthentication;
 using DemoAuthWebBackend.Infrastructure.NotificationService;
 using DemoAuthWebBackend.Infrastructure.NotificationService.DTOs;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.WebUtilities;
-using Microsoft.Extensions.Caching.Memory;
 using System.Text;
 
 namespace SpendingTracker_API.Authentication.PasswordAuthentication
@@ -17,22 +16,16 @@ namespace SpendingTracker_API.Authentication.PasswordAuthentication
         private readonly UserManager<AppUser> _userManager;
         private readonly INotificationSender _notificationService;
         private readonly IHttpContextAccessor _httpContextAccessor;
-        private readonly IMemoryCache _memoryCache;
-        private readonly IOtpAuth _otpAuth;
 
         public PasswordAuth(
             UserManager<AppUser> userManager,
             INotificationSender notificationService,
-            IHttpContextAccessor httpContextAccessor,
-            IMemoryCache memoryCache,
-            IOtpAuth otpAuth
+            IHttpContextAccessor httpContextAccessor
         )
         {
             _userManager = userManager;
             _notificationService = notificationService;
             _httpContextAccessor = httpContextAccessor;
-            _memoryCache = memoryCache;
-            _otpAuth = otpAuth;
         }
 
         public async Task<AuthenticationResult> AuthenticateAsync(PasswordCredentialsDto passwordCredentials)

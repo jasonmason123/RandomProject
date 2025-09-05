@@ -42,6 +42,11 @@ export const MENU: IMenuItem[] = [
       },
     ],
   },
+  {
+    name: 'Products',
+    icon: 'fas fa-box nav-icon',
+    path: '/products',
+  }
 ];
 
 const StyledBrandImage = styled(Image)`

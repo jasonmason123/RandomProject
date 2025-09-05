@@ -1,4 +1,6 @@
-﻿using System.Security.Cryptography;
+﻿using System.Linq.Expressions;
+using System.Reflection;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace DemoAuthWebBackend.Utils
@@ -54,6 +56,22 @@ namespace DemoAuthWebBackend.Utils
 
                 return sb.ToString(); // 64-character hex string
             }
+        }
+
+        public static Expression<Func<TEntity, object>> GetPropertyExpression<TEntity>(string propertyName)
+        {
+            var prop = typeof(TEntity)
+                .GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                .FirstOrDefault(p => string.Equals(p.Name, propertyName, StringComparison.OrdinalIgnoreCase));
+
+            if (prop == null)
+                throw new ArgumentException($"Property '{propertyName}' not found on {typeof(TEntity).Name}");
+
+            var parameter = Expression.Parameter(typeof(TEntity), "x");
+            var property = Expression.Property(parameter, prop);
+            var converted = Expression.Convert(property, typeof(object));
+
+            return Expression.Lambda<Func<TEntity, object>>(converted, parameter);
         }
     }
 }

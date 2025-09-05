@@ -4,6 +4,8 @@ using DemoAuthWebBackend.Infrastructure.AuthenticationService.OAuthAuthenticatio
 using DemoAuthWebBackend.Infrastructure.AuthenticationService.OtpAuthentication;
 using DemoAuthWebBackend.Infrastructure.AuthTokenService;
 using DemoAuthWebBackend.Infrastructure.NotificationService;
+using DemoAuthWebBackend.Repository._UoW;
+using DemoAuthWebBackend.Repository.ProductRepository;
 using DemoAuthWebBackend.Utils;
 using DemoAuthWebBackend.Utils.AuthTokenService;
 using DotNetEnv;
@@ -27,6 +29,8 @@ builder.Services.AddScoped<IPasswordAuth, PasswordAuth>();
 builder.Services.AddScoped<IOAuthAuthentication, OAuthAuthentication>();
 builder.Services.AddScoped<IAuthTokenProvider, JwtProvider>();
 builder.Services.AddScoped<INotificationSender, EmailSender>();
+builder.Services.AddScoped<IAppUnitOfWork, AppUnitOfWork>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
 
 var jwtIssuer = builder.Configuration["JwtSettings:Issuer"];
 var jwtAudience = builder.Configuration["JwtSettings:Audience"];
@@ -83,7 +87,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy(COMMON_POLICY_NAME, policy =>
     {
-        policy.WithOrigins("http://localhost:7058")
+        policy.WithOrigins("https://localhost:7058", "http://localhost:5173")
               .AllowAnyMethod()
               .AllowAnyHeader()
               .AllowCredentials();

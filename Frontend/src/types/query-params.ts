@@ -1,11 +1,11 @@
-export interface SortBy {
-  property: string;
-  order: "asc" | "desc";
-}
+import { SortOrder } from "./enums";
 
 export interface BaseQueryParams {
   pageNumber: number;
   pageSize: number;
   searchTerm?: string;
-  sortBy?: SortBy;
+  sortProperty?: string;
+  sortOrder?: SortOrder;
 }
+
+export interface ProductQueryParams extends BaseQueryParams {}

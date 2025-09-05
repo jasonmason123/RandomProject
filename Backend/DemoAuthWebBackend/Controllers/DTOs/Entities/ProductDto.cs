@@ -1,15 +1,9 @@
-﻿using DemoAuthWebBackend.Entities.Interfaces;
-using DemoAuthWebBackend.Utils.Enums;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using DemoAuthWebBackend.Utils.Enums;
 
-namespace DemoAuthWebBackend.Entities
+namespace DemoAuthWebBackend.Controllers.DTOs.Entities
 {
-    [Table(nameof(Product))]
-    public class Product : ISoftDeletable
+    public class ProductDto
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }

@@ -1,5 +1,5 @@
 import { ContentHeader } from "@app/components";
-import AutoTable from "@app/components/table/AutoTable";
+import EntityTable from "@app/components/table/EntityTable";
 import { Product } from "@app/class/entities";
 
 const ProductList = () => {
@@ -13,10 +13,11 @@ const ProductList = () => {
               <h3 className="card-title">Products</h3>
             </div>
             <div className="card-body">
-              <AutoTable
-                entityClass={Product}
+              <EntityTable<Product>
                 pageSize={10}
-                displayFields={["id", "name", "price"]}
+                apiName="product"
+                displayFields={["id", "name", "price", "flagDel"]}
+                sortFields={["id", "price", "flagDel"]}
               />
             </div>
           </div>

@@ -19,6 +19,7 @@
     </PackageReference>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.14.0" />
+    <PackageReference Include="X.PagedList" Version="10.5.9" />
   </ItemGroup>
 
   <ItemGroup>

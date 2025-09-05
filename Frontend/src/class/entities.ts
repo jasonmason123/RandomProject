@@ -1,13 +1,14 @@
-export class BaseEntity {}
+import { FlagBoolean } from "@app/types/enums";
 
-export class Product extends BaseEntity {
-  id!: number;
+export class BaseEntity<TKey extends string | number> {
+  id!: TKey;
+}
+
+export class Product extends BaseEntity<number> {
   name!: string;
   description!: string;
   price!: number;
-  views!: number;
-  likes!: number;
-  numberAvailable!: number;
   createdAt!: Date;
   updatedAt!: Date;
+  flagDel!: FlagBoolean;
 };

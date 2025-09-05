@@ -13,6 +13,8 @@ import PrivateRoute from './routes/PrivateRoute';
 import { useAppDispatch, useAppSelector } from './store/store';
 import { AuthProvider } from './context/AuthContext';
 import ProductList from './pages/products/ProductList';
+import ProductAddEdit from './pages/products/ProductAddEdit';
+import ProductDetails from './pages/products/ProductDetails';
 
 // Lazy imports for @pages and @modules
 const Main = lazy(() => import('@modules/main/Main'));
@@ -76,7 +78,14 @@ const App = () => {
               <Route path="sub-menu-1" element={<SubMenu />} />
               <Route path="blank" element={<Blank />} />
               <Route path="profile" element={<Profile />} />
-              <Route path="products" element={<ProductList />} />
+              <Route path="products">
+                <Route index element={<ProductList />} />
+                <Route path="new" element={<ProductAddEdit />} />
+                <Route path=":id">
+                  <Route index element={<ProductDetails />} />
+                  <Route path="edit" element={<ProductAddEdit />} />
+                </Route>
+              </Route>
               <Route path="/" element={<Dashboard />} />
             </Route>
           </Route>

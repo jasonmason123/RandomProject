@@ -1,11 +1,12 @@
-﻿using DemoAuthWebBackend.Utils.Enums;
+﻿using DemoAuthWebBackend.Entities.Interfaces;
+using DemoAuthWebBackend.Utils.Enums;
 using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DemoAuthWebBackend.Entities
 {
     [Table(nameof(AppUser))]
-    public class AppUser : IdentityUser
+    public class AppUser : IdentityUser, ISoftDeletable
     {
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public DateTime? UpdatedAt { get; set; }

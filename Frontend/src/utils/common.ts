@@ -1,5 +1,8 @@
 import { UserInfo } from "@app/types/dtos";
 
+export const API_HOST_AND_PORT = "";
+export type ExportTemplate = "CSV" | "Excel" | "PDF";
+
 export function checkStrongPassword(password: string) {
   const minLength = 8;
   const hasUpper = /[A-Z]/.test(password);
